@@ -63,7 +63,7 @@ class csv_insert_sql():
             mycursor.execute(str_sql,data_val)
         self.conn.commit()
         mycursor.close()
-        print('%s导入MySQL成功！共有%s行数据完成插入'%(csv_filename,i))#完成数据插入
+        print('%s导入MySQL成功！共有%s行数据完成插入'%(csv_filename,i)) #完成数据插入
     def db_close(self):
         self.conn.close()#关闭数据库
 if __name__=='__main__':
