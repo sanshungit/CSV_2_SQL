@@ -1,4 +1,4 @@
-import mysql.connector
+import mysql.connector#导入mysql库
 import csv
 class csv_insert_sql():
     def __init__(self,sql_name):
@@ -9,14 +9,14 @@ class csv_insert_sql():
             database=sql_name,
             charset='utf8mb4'
         )
-        print('成功连接数据库！')
+        print('成功连接数据库！')#使用mysql库连接本地MySQL数据库
     def drop_table(self,table_name):
         mycursor=self.conn.cursor()
         str_sql="drop table "+table_name
-        mycursor.execute(str_sql)  # 删除表C919sr_info
+        mycursor.execute(str_sql) 
         self.conn.commit()
         mycursor.close()
-        print('删除%s表！'%(table_name))
+        print('删除%s表！'%(table_name)) # 删除表C919sr_info
     def create_table(self,table_name):
         mycursor = self.conn.cursor()
         str_sql="create table "+table_name+'''(
@@ -42,10 +42,10 @@ class csv_insert_sql():
             sr_ata varchar (5) ,
             sr_isovertime varchar (5) 
             )engine=innodb default charset=utf8mb4'''
-        mycursor.execute(str_sql)  # 创建C919sr_info表
+        mycursor.execute(str_sql)  
         self.conn.commit()
         mycursor.close()
-        print('成功创建%s表！'%(table_name))
+        print('成功创建%s表！'%(table_name))# 在数据库中创建表单
     def data_insert(self,csv_filename,table_name):
         mycursor = self.conn.cursor()
         sr_file=open(csv_filename,encoding='utf-8-sig')
@@ -63,9 +63,9 @@ class csv_insert_sql():
             mycursor.execute(str_sql,data_val)
         self.conn.commit()
         mycursor.close()
-        print('%s导入MySQL成功！共有%s行数据完成插入'%(csv_filename,i))
+        print('%s导入MySQL成功！共有%s行数据完成插入'%(csv_filename,i))#完成数据插入
     def db_close(self):
-        self.conn.close()
+        self.conn.close()#关闭数据库
 if __name__=='__main__':
     mydb=csv_insert_sql('rrs_db')
     mydb.drop_table('sr_info')
